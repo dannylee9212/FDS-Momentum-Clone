@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Momentum Cloning Project</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__content">
+      <button class="header__link-button">Links</button>
+      <form class="header__search-form">
+        <span class="header__search-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+        <label for="searchInput" class="offscreen">Search form</label>
+        <input type="text" name="search-input" id="searchInput" class="header__search-input">
+      </form>
+    </div>
+    <section class="weather__content">
+      <div class="weather__tab">
+        <button class="weather__button">
+          <div class="weather__tab-info">
+            <span class="weather__button-icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+            <span class="weather__stat-number"></span>
+          </div>
+          <span class="weather__city"></span>
+        </button>
+      </div>
+      <div class="weather__pop-up">
+        <div class="weather__app hide">
+          <section class="weather__current">
+            <header class="weather__current-header">
+              <p class="weather__current-city"></p>
+              <p class="weather__condition"></p>
+            </header>
+            <div class="weather__app-info">
+              <span class="app__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+              <span class="app__stat-number"></span>
+              <span class="app__stat-number-pm"></span>
+            </div>
+          </section>
+          <section class="weather__forecast">
+            <li class="forecast__list">
+              <ul class="forecast__list-items selected">
+                <span class="forecast__label">TUE</span>
+                <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+                <span class="forecast__high">-2°</span>
+                <span class="forecast__low">-2°</span>
+              </ul>
+              <ul class="forecast__list-items">
+                <span class="forecast__label">TUE</span>
+                <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+                <span class="forecast__high">-2°</span>
+                <span class="forecast__low">-2°</span>
+              </ul>
+              <ul class="forecast__list-items">
+                <span class="forecast__label">TUE</span>
+                <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+                <span class="forecast__high">-2°</span>
+                <span class="forecast__low">-2°</span>
+              </ul>
+              <ul class="forecast__list-items">
+                <span class="forecast__label">TUE</span>
+                <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+                <span class="forecast__high">-2°</span>
+                <span class="forecast__low">-2°</span>
+              </ul>
+              <ul class="forecast__list-items">
+                <span class="forecast__label">TUE</span>
+                <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
+                <span class="forecast__high">-2°</span>
+                <span class="forecast__low">-2°</span>
+              </ul>
+            </li>
+          </section>
+        </div>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="main-content">
+      <p id="currentTime" class="main-content__time"></p>
+      <p id="greetingWithName" class="main-content__title">Good Morning</p>
+      <label for="mainTodo" class="main-content__input-label">What is your main focus for today?</label>
+      <input type="text" name="main-todo" id="mainTodo" class="main-content__input">
+    </section>
+  </main>
+  <footer class="footer">
+    <nav class="footer__nav">
+      <ul class="footer__menu">
+        <li class="footer__menu-item">
+          <div class="background-image-info">
+            <i class="fa fa-cog"></i>
+            <span class='location' id="location">Location information is not provided</span>
+            <span class='photo-provider'id='photoProvider'>Eleven Moore</span>
+            <span>/ unsplash</span>  
+          </div>
+        </li>
+        <li class="footer__menu-item">
+          <div class="famous-quote">
+            <q>"One small positive though can change your whole day"</q>
+          </div>
+        </li>
+        <li class="footer__menu-item">
+          <section class="sub-todo">
+            <button class="sub-todo__button">Todo</button>
+            <div class="sub-todo__popup hide"> 
+              <div class="sub-todo__menu">
+                <span class="sub-todo__selected">
+                  <button class="show-dropdown icon-wrap">
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                  </button>
+                </span> 
+              </div>
+              <div class="sub-todo__drop-down">
+                <button id="Inbox">Inbox <span class="todo-count"></span></button>
+                <button id="Today">Today <span class="todo-count"></span></button>
+                <button id="Done">Done <span class="todo-count"></span></button> 
+                <button>+ New List</button>  
+              </div>      
+              <ul class="sub-todo__list"></ul>
+            <input class="sub-todo__input" placeholder="New Todo" />
+            <button class="more-option icon-wrap">
+              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </button>
+          </div>   
+        </section>
+    </nav>
+  </footer>
+</body>
+</html>
