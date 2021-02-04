@@ -1,0 +1,265 @@
+@keyframes popTodo {
+  0% { 
+    opacity: 0;
+    }
+  100% { 
+    opacity: 1;
+    }
+}
+
+.sub-todo__button {
+  background-color: transparent;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  font-size: 1.1em;
+  border: none;
+  outline: 0;
+  color: #fff;
+  cursor: pointer;
+  height: 30px;
+  opacity: 0.8;
+}
+
+.sub-todo__button:hover {
+  opacity: 1;
+}
+
+
+.sub-todo__popup {
+  width: 250px;
+  min-height: 100px;
+  max-height: 350px;
+  padding: 15px 25px;
+  background-color: #fff;
+  color: #fff;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  border-radius: 0.5em;
+}
+
+.sub-todo__popup:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top-color: #fff;
+    border-bottom: 0;
+    margin-left: 120px;
+    margin-bottom: -7px;
+}
+
+.sub-todo__popup.active {
+  animation: popTodo 0.4s ease-in-out 1;
+}
+.sub-todo__popup.hide {
+  opacity: 0;
+}
+.transition {
+  transition: all 0.4s;
+}
+.sub-todo__menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sub-todo__selected {
+  color: #818181;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.show-dropdown {
+  background-color: #fff;
+}
+.sub-todo__selected:hover .show-dropdown {
+  background-color: #ededed;
+}
+
+.sub-todo__popup i{
+  position: static;
+  font-size: 0.7rem;
+  color: #99999a;
+  
+}
+.show-dropdown {
+  margin-left: 5px;
+}
+.icon-wrap {
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer; 
+  padding: 2px 5px;
+}
+
+.icon-wrap i {
+  margin: 0;
+}
+
+
+
+.more-option {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background-color: #fff;
+
+}
+
+.more-option:hover {
+  background-color: #ededed;
+}
+
+.sub-todo__drop-down {
+  display: none;
+  position: absolute;
+  top: 40px;
+  background-color: #ededed;
+  min-width: 220px;
+  box-shadow: 3px 4px 6px 0px #B5B5B5;
+}
+
+.sub-todo__drop-down.active {
+  display: block;
+}
+
+
+.sub-todo__drop-down:after {
+  content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-bottom-color: #ededed;
+	border-top: 0;
+	margin-left: -95px;
+	margin-top: -5px;
+}
+
+.sub-todo__drop-down button {
+  color:#5f5f5f;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 16px;
+  display: block;
+  border: none;
+  outline: none;
+  text-align: left;
+}
+
+.sub-todo__drop-down button:hover{
+  background-color: #fff;
+}
+
+.sub-todo__list {
+  color: #7c7c7c;
+  margin-top: 15px;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+/* todo 리스트 */
+
+.sub-todo__input {
+  display: block;
+  margin-top: 15px;
+  outline: none;
+  border: none;
+  width: 100%;
+  background-color: #fff;
+}
+
+.sub-todo__input.hidden {
+  display: none;
+}
+
+.sub-todo__list [type='checkbox'] {
+  margin-right: 10px;
+}
+
+.sub-todo__empty {
+  padding: 40px 50px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: gray;
+  display:flex;
+  flex-flow:column;
+}
+
+.sub-todo__empty button {
+  margin: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.sub-todo__empty button i {
+  margin: 0;
+}
+
+.sub-todo__go-to-button {
+  background-color: transparent;
+  color: #9d9d9d;
+}
+
+.sub-todo__go-to-button i {
+  font-size: 0.5rem;
+}
+
+.sub-todo__new-button {
+  color: #fff;
+  font-size: 0.8rem;
+  background-color:#57673cf2;
+  padding: 8px;
+  border-radius: 15px;
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+}
+
+.todo-item {
+  display: flex;
+}
+
+.todo-item label {
+  flex-grow: 1;
+  max-width: 250px; 
+  word-break: break-all;
+  margin-right: 10px;
+  margin-bottom: 10px
+}
+.todo-item .done {
+  text-decoration: line-through;
+  color: rgba(128, 128, 128, 0.511);
+}
+
+.todo-item i {
+  font-size: 0.7rem;
+  float: right;
+}
+
+.todo-item > .remove-todo{
+  display: none;
+}
+
+.todo-item > .remove-todo:hover {
+  color: red;
+}
+
+.todo-item:hover .remove-todo{
+  display: block;
+  cursor:pointer
+}
+
+
+
+
+

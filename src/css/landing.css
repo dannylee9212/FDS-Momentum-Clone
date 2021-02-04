@@ -1,0 +1,182 @@
+body {
+  background-color: grey;
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.offscreen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+
+}
+
+/* header */
+.header {
+  display: flex;
+  justify-content: space-between
+}
+.header__content {
+  display: flex;
+}
+.header__search-form {
+  position: relative;
+}
+.header__search-form:hover .header__search-input {
+  opacity: 0.6;
+}
+.header__search-form:focus .header__search-input {
+  opacity: 1;
+}
+.header__search-icon {
+  font-size: 17px;
+  position: absolute;
+  margin-left: 10px;
+  top: 20px;
+}
+.header__link-button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  line-height: 60px;
+  font-size: 1.2rem;
+  padding: 0 20px;
+}
+.header__link-button:focus {
+  outline: none;
+}
+.header__link-button:focus-visible {
+  background-color: aqua;
+}
+.header__search-input {
+  border: 0;
+  background: transparent;
+  border-bottom: 1px solid #fff;
+  opacity: 0;
+  line-height: 40px;
+  padding-top:10px;
+  padding-left: 35px;
+  margin-left: 10px;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 225px;
+}
+.header__search-input:focus {
+  outline: none;
+}
+/* main */
+.main-content {
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 335px;
+}
+.main-content__time {
+  font-size: 10rem;
+}
+.main-content__title {
+  font-size: 3rem;
+}
+.main-content__input-label {
+  font-size: 2.5rem;
+  padding: 20px 0;
+}
+.main-content__input {
+  border: 0;
+  border-bottom: 1px solid #fff;
+  width: 565px;
+  margin: 0 auto;
+  background: transparent;
+  line-height: 40px;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+.main-content__input:focus {
+  outline: none;
+}
+/* main todo */
+.main-todo {
+  margin-top: 20px;
+}
+.main-todo__heading {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.main-todo__content:hover .main-todo__checkbox,
+.main-todo__content:hover i {
+  opacity: 1;
+}
+
+.main-todo__checkbox {
+  border: 2px solid #fff;
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+.main-todo__description {
+  font-size: 1.5rem;
+  margin: 0 20px;
+}
+.main-todo__content i {
+  font-size: 1.5rem;
+  opacity: 0;
+}
+.line-through {
+  text-decoration: line-through;
+}
+/* footer */
+.footer__nav {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  padding: 0 20px;
+}
+.background-image-info {
+  position: relative;
+}
+
+.location {
+  display: block;
+  margin-left: 40px;
+}
+.photo-provider {
+  margin-left: 40px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.footer__nav i {
+  margin-right: 20px;
+  position: absolute;
+  bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.famous-quote {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+.famous-quote,
+.todos {
+  display: flex;
+  align-items: center;
+}
