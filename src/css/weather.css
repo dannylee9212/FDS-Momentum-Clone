@@ -130,15 +130,15 @@
   margin-top: 15px;
   padding-top: 10px;
   font-size: .7rem;
+  cursor: pointer;
 }
 
 .forecast__list > .selected {
-  background-color: #eeefef;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 1px 0 3px #ececec, 0 1px 3px #ececec, -1px 0 3px #ececec, 0 -1px 3px #ececec;
 }
 
 .forecast__list-items {
-  cursor: pointer;
   padding: 5px 2px;
   width: 75px;
   height: 42px;
