@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-let todos = [{}];
+let todos = [{ id: 1, content: 'default item', completed: false }];
 
 const app = express();
 const PORT = 5000;

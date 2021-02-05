@@ -103,14 +103,11 @@
   margin: 0;
 }
 
-
-
 .more-option {
   position: absolute;
   top: 15px;
   right: 20px;
   background-color: #fff;
-
 }
 
 .more-option:hover {
@@ -154,6 +151,14 @@
   border: none;
   outline: none;
   text-align: left;
+}
+
+.sub-todo__drop-down .selected {
+  font-weight: 700;
+}
+
+.todo-count { 
+  margin-left: 5px;
 }
 
 .sub-todo__drop-down button:hover{
