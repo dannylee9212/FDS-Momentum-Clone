@@ -37,10 +37,11 @@ const showBgInfo = (location, username) => {
     document.getElementById('photoProvider').textContent = username === null ? 'Unknown' : username;
 }
 
-export default bgHandler = async (URL_BG, ACCESS_KEY, currentDate) => { 
+const bgHandler = async (URL_BG, ACCESS_KEY, currentDate) => { 
     const bgImageInfo = await obtainBgImage(URL_BG, ACCESS_KEY, currentDate);
 
     applyBgToBody(bgImageInfo.urls.full);
     showBgInfo(bgImageInfo.user.location, bgImageInfo.user.name);
-}
+};
 
+export default bgHandler;
