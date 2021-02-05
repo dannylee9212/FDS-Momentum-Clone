@@ -1,8 +1,8 @@
 import { doc } from 'prettier';
-import ACCESS_KEY_FOR_WEATHERDATA from './utils/constants';
 
 const $weatherBtn = document.querySelector('.weather__button');
 const $weatherAppCurr = document.querySelector('.weather__current');
+const $forecastList = document.querySelector('.forecast__list');
 
 const weatherHandler = () => {
   const renderCurr = currData => {
@@ -23,7 +23,18 @@ const weatherHandler = () => {
   </div>`;
   };
 
-  const renderForecast = () => {};
+  const renderForecast = dailyArr => {
+    let html = '';
+    dailyArr.forEach((dailyInfo, index) => {
+      html += `<ul class="forecast__list-items forecast__list-item${index} ${!index ? 'selected' : ''}">
+        <span class="forecast__label">${dailyInfo[0]}</span>
+        <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/${dailyInfo[3]}@2x.png" alt="weather icon"></span>
+        <span class="forecast__high">${Math.round(dailyInfo[1])}°</span>
+        <span class="forecast__low">${Math.round(dailyInfo[2])}°</span>
+      </ul>`;
+    });
+    $forecastList.innerHTML = html;
+  };
 
   const getCurrWeather = async (lat, lon) => {
     const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a0542651a9f965001a4d891288d5dee2&units=metric`);
@@ -39,6 +50,7 @@ const weatherHandler = () => {
     const day2Info = [];
     const day3Info = [];
     const day4Info = [];
+    const _day5Info = [];
 
     list.forEach(unitData => {
       const today = (new Date()).getDay();
@@ -53,10 +65,37 @@ const weatherHandler = () => {
       else if (day === from0To6(today + 1)) day1Info.push(unitData);
       else if (day === from0To6(today + 2)) day2Info.push(unitData);
       else if (day === from0To6(today + 3)) day3Info.push(unitData);
-      else day4Info.push(unitData);
+      else if (day === from0To6(today + 4)) day4Info.push(unitData);
+      else _day5Info.push(unitData);
     });
 
     const dailyInfos = [day0Info, day1Info, day2Info, day3Info, day4Info];
+
+    // get day
+    const getDays = dayInfo => {
+      const day = new Date(dayInfo[0].dt_txt).getDay();
+      const getDay = dayNumber => {
+        switch (dayNumber) {
+          case 0:
+            return 'Sunday';
+          case 1:
+            return 'Monday';
+          case 2:
+            return 'Tuesday';
+          case 3:
+            return 'Wednesday';
+          case 4:
+            return 'Thursday';
+          case 5:
+            return 'Friday';
+          case 6:
+            return 'Saturday';
+          default:
+            return 'Sunday';
+        }
+      };
+      return getDay(day);
+    };
 
     // get daily min, max temp, icon
     const getDailyMinTemp = dayInfo => {
@@ -87,27 +126,23 @@ const weatherHandler = () => {
       return dailyIcon;
     };
 
+    const dayArray = dailyInfos.map(dayInfo => getDays(dayInfo));
     const dailyMinTempArray = dailyInfos.map(dayInfo => getDailyMinTemp(dayInfo));
     const dailyMaxTempArray = dailyInfos.map(dayInfo => getDailyMaxTemp(dayInfo));
     const dailyIconArray = dailyInfos.map(dayInfo => getDailyIcon(dayInfo));
 
-    console.dir(dailyIconArray);
+    const dailyArray = dayArray.map((day, i) => {
+      return [day, dailyMaxTempArray[i], dailyMinTempArray[i], dailyIconArray[i]];
+    });
+
+    renderForecast(dailyArray);
   };
 
   const getForecast = async (lat, lon) => {
     const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a0542651a9f965001a4d891288d5dee2&units=metric`);
     const forecastData = await res.json();
     setEachDayInfo(forecastData);
-    // renderForecast(forecastData);
-    // 템플릿
-    /*
-    `<ul class="forecast__list-items selected">
-    <span class="forecast__label">TUE</span>
-    <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></span>
-    <span class="forecast__high">-2°</span>
-    <span class="forecast__low">-2°</span>
-    </ul>`;
-    */
+    console.dir(forecastData);
   };
 
   const getLocation = () => {
