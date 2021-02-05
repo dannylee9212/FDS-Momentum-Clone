@@ -47,6 +47,7 @@
     "@babel/polyfill": "^7.12.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "unsplash-js": "^7.0.4"
+    "unsplash-js": "^7.0.4",
+    "uuid": "^8.3.2"
   }
 }
