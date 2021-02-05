@@ -3,7 +3,7 @@ import weatherHandler from './weather';
 import subTodoHandler from './subTodo';
 import mainTodoHandler from './mainTodo';
 import bgHandler from './background';
-import { URL_BG, ACCESS_KEY, DEFAULT_STATE, URL } from './utils/constants';
+import { URL_BG, ACCESS_KEY, URL } from './utils/constants';
 
 
 const time = new Time();
@@ -17,7 +17,7 @@ time.storeCurrentDateToLocalStorage();
 // get and set weather info
 weatherHandler();
 // sub todo functionality handling
-subTodoHandler(DEFAULT_STATE, URL);
+subTodoHandler(URL);
 // main todo functionality handling
 mainTodoHandler();
 

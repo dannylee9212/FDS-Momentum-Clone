@@ -1,7 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 
-let todos = [];
+let todos = [{
+  id: "c5f3afb9-9c63-4903-b599-f32c6a9eeff1",
+  content: 'hackathon',
+  completed: false,
+  date: '2021-02-04T06:25:51.520Z'
+}];
 
 const app = express();
 const PORT = 5000;

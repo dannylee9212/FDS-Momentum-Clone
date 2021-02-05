@@ -5,6 +5,5 @@ export const URL_BG = 'https://api.unsplash.com/photos/random?client_id=';
 // new secret eky - 6hQ0UAUN0YAyWi0sxCtibvgjUzLKANhymLzi_eqVx6c
 
 // default state and URL for sub-todo
-export const DEFAULT_STATE = 'Today';
-export const URL = 'http://localhost:5000'
+export const URL = 'http://localhost:5000';
 
