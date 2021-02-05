@@ -208,7 +208,7 @@
 }
 
 .sub-todo__empty button i {
-  margin: 0;
+  margin: 0 0 0 3px;
 }
 
 .sub-todo__go-to-button {
