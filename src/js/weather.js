@@ -7,7 +7,9 @@ const $forecastList = document.querySelector('.forecast__list');
 let dailyArray = [];
 let currCity = '';
 
+
 const weatherHandler = () => {
+  
   const renderCurr = currData => {
     $weatherBtn.innerHTML = `<div class="weather__tab-info">
     <span class="weather__button-icon"><img src="http://openweathermap.org/img/wn/${currData.weather[0].icon}@2x.png" alt="weather icon"></span>

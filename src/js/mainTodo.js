@@ -21,7 +21,6 @@ const showMainTodo = inputValue => {
 }
 
 const showMainInput = () => {
-
     const $newFrag = document.createDocumentFragment();
     const $newNode = document.createElement('label');
     $newNode.classList.add('main-content__input-label');

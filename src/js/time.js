@@ -1,4 +1,4 @@
-export default class Time {
+class Time {
     #todayDate = '';
     #currentDate = '';
 
@@ -23,3 +23,5 @@ export default class Time {
         return this.#currentDate;
     }
 }
+
+export default new Time(); 
