@@ -4,8 +4,7 @@ body {
   height: 100vh;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
