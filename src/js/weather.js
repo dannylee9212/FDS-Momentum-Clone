@@ -58,7 +58,7 @@ const weatherHandler = () => {
 
     const dailyInfos = [day0Info, day1Info, day2Info, day3Info, day4Info];
 
-    // get daily min, max temp
+    // get daily min, max temp, icon
     const getDailyMinTemp = dayInfo => {
       return dayInfo.reduce((minTemp, { main }) => {
         if (main.temp_min < minTemp) return main.temp_min;
@@ -71,13 +71,27 @@ const weatherHandler = () => {
         return maxTemp;
       }, -Infinity);
     };
+    const getDailyIcon = dayInfo => {
+      let dailyIcon = '';
+      const midTimeIndex = (() => {
+        let cnt = -1;
+        dayInfo.forEach(_ => cnt++, 0);
 
-    const dailyMinTemp = dailyInfos.map(dayInfo => getDailyMinTemp(dayInfo));
-    const dailyMaxTemp = dailyInfos.map(dayInfo => getDailyMaxTemp(dayInfo));
+        return Math.floor(cnt);
+      })();
 
-    console.dir(day0Info);
-    console.dir(dailyMinTemp);
-    console.dir(dailyMaxTemp);
+      dayInfo.forEach((timeInfo, index) => {
+        if (index === midTimeIndex) dailyIcon = timeInfo.weather[0].icon;
+      });
+
+      return dailyIcon;
+    };
+
+    const dailyMinTempArray = dailyInfos.map(dayInfo => getDailyMinTemp(dayInfo));
+    const dailyMaxTempArray = dailyInfos.map(dayInfo => getDailyMaxTemp(dayInfo));
+    const dailyIconArray = dailyInfos.map(dayInfo => getDailyIcon(dayInfo));
+
+    console.dir(dailyIconArray);
   };
 
   const getForecast = async (lat, lon) => {
