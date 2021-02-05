@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const subTodoHandler = (TODO_STATE, URL) => {
   const $toggleTodoBtn = document.querySelector('.sub-todo__button');
   const $todoPopUp = document.querySelector('.sub-todo__popup');
@@ -38,7 +40,7 @@ const subTodoHandler = (TODO_STATE, URL) => {
         state === 'Done' ? activeCount : completedCount
       } 
       todos in ${
-        state === 'Today' ? 'Done' : 'Today'
+        state === 'Today' ? 'Inbox' : 'Today'
       }<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
       <button class="sub-todo__new-button">New Todo</button>  
     </div> 
@@ -66,6 +68,12 @@ const subTodoHandler = (TODO_STATE, URL) => {
     $inputTodo.classList.remove('hidden');
     $inputTodo.focus();
   };
+
+  const toggleState = () => {
+    console.log(state);
+    state === 'Today' ? state = 'Inbox' : state = 'Today';
+    render();
+  }
 
   const isSameDay = (date1, date2) => {
     return (
@@ -118,15 +126,12 @@ const subTodoHandler = (TODO_STATE, URL) => {
     body: JSON.stringify(payload)
   });
 
-  const generateId = () =>
-    todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
-
   const addTodo = async content => {
     try {
       const res = await fetch(
         `${URL}/todos`,
         config('POST', {
-          id: generateId(),
+          id: uuidv4(),
           content,
           completed: false,
           date: new Date()
@@ -141,7 +146,7 @@ const subTodoHandler = (TODO_STATE, URL) => {
 
   const toggleTodo = async id => {
     try {
-      const { completed } = todos.find(todo => todo.id === +id);
+      const { completed } = todos.find(todo => todo.id === id);
       const res = await fetch(
         `${URL}/todos/${id}`,
         config('PATCH', { completed })
@@ -164,7 +169,7 @@ const subTodoHandler = (TODO_STATE, URL) => {
   };
 
   // 이벤트 핸들러
-  window.onload = getTodos;
+  document.addEventListener('DOMContentLoaded', getTodos);
 
   $toggleTodoBtn.onclick = () => {
     if ($todoPopUp.classList.contains('active')) {
@@ -191,6 +196,7 @@ const subTodoHandler = (TODO_STATE, URL) => {
 
   $todos.onclick = e => {
     if (e.target.classList.contains('sub-todo__new-button')) createNew(); // 새로운 투두 만들때 버튼 클릭
+    if (e.target.classList.contains('sub-todo__go-to-button')) toggleState();
     if (!e.target.matches('.remove-todo')) return;
     removeTodo(e.target.parentNode.id);
   };
