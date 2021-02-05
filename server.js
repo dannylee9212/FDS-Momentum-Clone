@@ -1,20 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-let todos = [
-  {
-    id: 1,
-    content: '2 days ago',
-    date: '2021-02-04T03:38:36.044Z',
-    completed: false
-  },
-  {
-    id: 2,
-    content: 'posted today',
-    date: '2021-02-05T03:38:36.044Z',
-    completed: false
-  }
-];
+let todos = [];
 
 const app = express();
 const PORT = 5000;
@@ -37,14 +24,14 @@ app.post('/todos', (req, res) => {
 app.patch('/todos/:id', (req, res) => {
   const { id } = req.params;
   todos.forEach(todo => {
-    if (todo.id === +id) todo.completed = !req.body.completed;
+    if (todo.id === id) todo.completed = !req.body.completed;
   });
   res.send(todos);
 });
 
 app.delete('/todos/:id', (req, res) => {
   const { id } = req.params;
-  todos = todos.filter(todo => todo.id !== +id);
+  todos = todos.filter(todo => todo.id !== id);
   return res.send(todos);
 });
 
