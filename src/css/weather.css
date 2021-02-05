@@ -63,8 +63,7 @@
   height: 40px;
 }
 
-.app__stat-number-pm,
-.app__degree-pm {
+.app__stat-number-low {
   font-size: 2.7rem;
   color: #9a9a9b;
   line-height: 1.2rem;

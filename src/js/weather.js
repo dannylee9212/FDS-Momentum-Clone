@@ -1,8 +1,11 @@
 import { doc } from 'prettier';
 
 const $weatherBtn = document.querySelector('.weather__button');
+const $weatherApp = document.querySelector('.weather__app');
 const $weatherAppCurr = document.querySelector('.weather__current');
 const $forecastList = document.querySelector('.forecast__list');
+let dailyArray = [];
+let currCity = '';
 
 const weatherHandler = () => {
   const renderCurr = currData => {
@@ -10,7 +13,7 @@ const weatherHandler = () => {
     <span class="weather__button-icon"><img src="http://openweathermap.org/img/wn/${currData.weather[0].icon}@2x.png" alt="weather icon"></span>
     <span class="weather__stat-number">${Math.round(currData.main.temp)}°</span>
   </div>
-  <span class="weather__city">${currData.name}</span>`;
+  <span class="weather__city">${currCity}</span>`;
 
     $weatherAppCurr.innerHTML = `<header class="weather__current-header">
     <p class="weather__current-city">${currData.name}</p>
@@ -26,19 +29,33 @@ const weatherHandler = () => {
   const renderForecast = dailyArr => {
     let html = '';
     dailyArr.forEach((dailyInfo, index) => {
-      html += `<ul class="forecast__list-items forecast__list-item${index} ${!index ? 'selected' : ''}">
+      html += `<li class="forecast__list-items forecast__list-item${index} ${!index ? 'selected' : ''}">
         <span class="forecast__label">${dailyInfo[0]}</span>
-        <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/${dailyInfo[3]}@2x.png" alt="weather icon"></span>
+        <span class="forecast__icon"><img src="http://openweathermap.org/img/wn/${dailyInfo[3].dailyIcon}@2x.png" alt="weather icon"></span>
         <span class="forecast__high">${Math.round(dailyInfo[1])}°</span>
         <span class="forecast__low">${Math.round(dailyInfo[2])}°</span>
-      </ul>`;
+      </li>`;
     });
     $forecastList.innerHTML = html;
+  };
+
+  const renderSelected = selectedDayArr => {
+    $weatherAppCurr.innerHTML = `<header class="weather__current-header">
+    <p class="weather__current-city">${currCity}</p>
+    <p class="weather__condition">${selectedDayArr[0][3].dailyDesc}</p>
+  </header>
+  <div class="weather__app-info">
+    <span class="app__icon"><img src="http://openweathermap.org/img/wn/${selectedDayArr[0][3].dailyIcon}@2x.png" alt="weather icon"></span>
+    <span class="app__stat-number">${Math.round(selectedDayArr[0][1])}°</span>
+    <span class="app__stat-number-low">${Math.round(selectedDayArr[0][2])}°</span>
+  </div>`;
   };
 
   const getCurrWeather = async (lat, lon) => {
     const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a0542651a9f965001a4d891288d5dee2&units=metric`);
     const currData = await res.json();
+
+    currCity = currData.name;
 
     renderCurr(currData);
   };
@@ -96,7 +113,6 @@ const weatherHandler = () => {
       };
       return getDay(day);
     };
-
     // get daily min, max temp, icon
     const getDailyMinTemp = dayInfo => {
       return dayInfo.reduce((minTemp, { main }) => {
@@ -112,6 +128,8 @@ const weatherHandler = () => {
     };
     const getDailyIcon = dayInfo => {
       let dailyIcon = '';
+      let dailyDesc = '';
+
       const midTimeIndex = (() => {
         let cnt = -1;
         dayInfo.forEach(_ => cnt++, 0);
@@ -120,10 +138,13 @@ const weatherHandler = () => {
       })();
 
       dayInfo.forEach((timeInfo, index) => {
-        if (index === midTimeIndex) dailyIcon = timeInfo.weather[0].icon;
+        if (index === midTimeIndex) {
+          dailyIcon = timeInfo.weather[0].icon;
+          dailyDesc = timeInfo.weather[0].description;
+        }
       });
 
-      return dailyIcon;
+      return { dailyIcon, dailyDesc };
     };
 
     const dayArray = dailyInfos.map(dayInfo => getDays(dayInfo));
@@ -131,7 +152,7 @@ const weatherHandler = () => {
     const dailyMaxTempArray = dailyInfos.map(dayInfo => getDailyMaxTemp(dayInfo));
     const dailyIconArray = dailyInfos.map(dayInfo => getDailyIcon(dayInfo));
 
-    const dailyArray = dayArray.map((day, i) => {
+    dailyArray = dayArray.map((day, i) => {
       return [day, dailyMaxTempArray[i], dailyMinTempArray[i], dailyIconArray[i]];
     });
 
@@ -142,7 +163,6 @@ const weatherHandler = () => {
     const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a0542651a9f965001a4d891288d5dee2&units=metric`);
     const forecastData = await res.json();
     setEachDayInfo(forecastData);
-    console.dir(forecastData);
   };
 
   const getLocation = () => {
@@ -161,7 +181,31 @@ const weatherHandler = () => {
     getForecast(lat, lon);
   };
 
+  // event handler
   document.addEventListener('DOMContentLoaded', getLocation);
+
+  $weatherBtn.onclick = () => {
+    if ($weatherApp.classList.contains('hide')) {
+      $weatherApp.classList.add('transition');
+      $weatherApp.classList.replace('hide', 'active');
+    } else {
+      $weatherApp.classList.replace('active', 'hide');
+    }
+  };
+
+  $forecastList.onclick = e => {
+    if (!e.target.closest('li')) return;
+    if (e.target.closest('li').classList.contains('selected')) return;
+    [...e.currentTarget.children].forEach(li => {
+      if (li.classList.contains('selected')) li.classList.remove('selected');
+    });
+    e.target.closest('li').classList.toggle('selected');
+    const currentDate = e.target.closest('li').firstElementChild.textContent;
+
+    const currentDay = dailyArray.filter(day => currentDate === day[0]);
+
+    renderSelected(currentDay);
+  };
 };
 
 export default weatherHandler;
