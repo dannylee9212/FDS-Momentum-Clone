@@ -23,7 +23,6 @@ const isVisted = () => {
 }
 
 const isDifferentDate = currentDate => {
-
     if(localStorage.getItem('current-date') !== String(currentDate)) return true;
     return false;
 }
